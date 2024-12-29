@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+      {
+          "label": "build",
+          "type": "shell",
+          "command": "make",
+          "args": [],
+          "group": "build",
+          "options": {"cwd": "${workspaceFolder}"}
+      },
+      {
+          "label": "clean",
+          "type": "shell",
+          "command": "make",
+          "args": ["clean"],
+          "group": "build",
+          "options": {"cwd": "${workspaceFolder}"}
+      },
+      {
+        "label": "test",
+        "type": "shell",
+        "command": "make",
+        "args": ["test"],
+        "group": "build",
+        "options": {"cwd": "${workspaceFolder}"}
+      }
+  ]
+}
