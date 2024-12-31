@@ -6,22 +6,21 @@
 #include <string.h>
 
 typedef enum {
-  TK_RESERVED,
   TK_NUM,
+  TK_RESERVED,
   TK_EOF
 } TokenKind;
 
 typedef struct Token Token;
 
-struct Token {
-  TokenKind kind;
+struct Token{
   Token *next;
-  int val;
+  TokenKind kind;
   char *str;
+  int val;
 };
 
 Token *token;
-
 char *user_input;
 
 void error_at(char *loc, char *fmt, ...) {
