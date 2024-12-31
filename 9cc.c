@@ -93,6 +93,8 @@ Token *tokenize(char *p) {
       cur->val = strtol(p, &p, 10);
       continue;
     }
+
+    error_at(p, "トークナイズできません");
   }
   cur = new_token(TK_EOF, cur, p);
 
