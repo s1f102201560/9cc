@@ -93,28 +93,25 @@ Token *tokenize(char *p) {
       cur->val = strtol(p, &p, 10);
       continue;
     }
-    error_at(p, "トークナイズできません。");
   }
   cur = new_token(TK_EOF, cur, p);
+
   return head.next;
 }
-
-
 
 int main(int argc, char **argv)
 {
   if (argc != 2) {
-    fprintf(stderr, "引数の個数を間違えています\n");
+    fprintf(stderr, "引数の個数が誤っています\n");
     return 1;
   }
 
   user_input = argv[1];
-  token = tokenize(user_input);
+  token = tokenize(argv[1]);
 
   printf(".intel_syntax noprefix\n");
   printf(".globl main\n");
   printf("main:\n");
-
   printf("  mov rax, %d\n", expect_number());
 
   while(!at_eof()) {
@@ -127,5 +124,6 @@ int main(int argc, char **argv)
     printf("  sub rax, %d\n", expect_number());
   }
   printf("  ret\n");
+
   return 0;
 }
