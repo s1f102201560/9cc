@@ -48,7 +48,7 @@ bool consume(char op) {
 
 void expect(char op) {
   if (token->kind != TK_RESERVED || token->str[0] != op)
-    error_at(token->str, "expected '%c'", op);
+    error_at(token->str, "'%c' expected", op);
   token = token->next;
 }
 
