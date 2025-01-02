@@ -176,7 +176,19 @@ Node *mul();
 Node *primary();
 
 // expr
+Node *expr() {
+  Node *node = mul();
 
+  for (;;) {
+    if (consume('+')) {
+      node = new_binary(ND_ADD, node, mul());
+    } else if (consume('-')) {
+      node = new_binary(ND_SUB, node, mul());
+    } else {
+      return node;
+    }
+  }
+}
 
 // mul
 Node *mul() {
