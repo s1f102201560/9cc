@@ -152,7 +152,7 @@ Node *new_node(NodeKind kind) {
   Node *node = calloc(1, sizeof(Node));
   node->kind = kind;
   return node;
-}
+};
 
 // new_binary
 Node *new_binary(NodeKind kind, Node *lhs, Node *rhs) {
