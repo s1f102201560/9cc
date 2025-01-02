@@ -180,13 +180,12 @@ Node *expr() {
   Node *node = mul();
 
   for (;;) {
-    if (consume('+')) {
+    if (consume('+'))
       node = new_binary(ND_ADD, node, mul());
-    } else if (consume('-')) {
+    else if (consume('-'))
       node = new_binary(ND_SUB, node, mul());
-    } else {
+    else
       return node;
-    }
   }
 }
 
@@ -194,15 +193,16 @@ Node *expr() {
 Node *mul() {
   Node *node = primary();
 
-  for (;;) {
+  for(;;) {
     if (consume('*'))
       node = new_binary(ND_MUL, node, primary());
     else if (consume('/'))
       node = new_binary(ND_DIV, node, primary());
     else
       return node;
-  }
+  } 
 }
+
 
 // primary
 Node *primary() {
@@ -214,6 +214,7 @@ Node *primary() {
 
   return new_num(expect_number());
 }
+
 
 void gen(Node *node) {
   if (node->kind == ND_NUM) {
