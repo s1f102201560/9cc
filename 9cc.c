@@ -152,16 +152,14 @@ Node *new_node(NodeKind kind) {
   Node *node = calloc(1, sizeof(Node));
   node->kind = kind;
   return node;
-};
+}
 
 // new_binary
 Node *new_binary(NodeKind kind, Node *lhs, Node *rhs) {
   Node *node = new_node(kind);
-
   node->lhs = lhs;
   node->rhs = rhs;
-  
-  return node; 
+  return node;
 }
 
 // new_num
@@ -193,16 +191,15 @@ Node *expr() {
 Node *mul() {
   Node *node = primary();
 
-  for(;;) {
+  for (;;) {
     if (consume('*'))
       node = new_binary(ND_MUL, node, primary());
     else if (consume('/'))
       node = new_binary(ND_DIV, node, primary());
     else
       return node;
-  } 
+  }
 }
-
 
 // primary
 Node *primary() {
