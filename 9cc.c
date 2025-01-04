@@ -151,7 +151,7 @@ Node *new_node(NodeKind kind) {
 }
 
 // new_binary
-Node *new_binary(NodeKind kind, Node *lhs, Node *rhs) {
+Node *new_binary(NodeKind kind, Node* lhs, Node*rhs) {
   Node *node = new_node(kind);
   node->lhs = lhs;
   node->rhs = rhs;
@@ -204,7 +204,6 @@ Node *primary() {
     expect(')');
     return node;
   }
-
   return new_num(expect_number());
 }
 
@@ -226,15 +225,12 @@ void gen(Node *node) {
     case ND_ADD:
       printf("  add rax, rdi\n");
       break;
-    
     case ND_SUB:
       printf("  sub rax, rdi\n");
       break;
-    
     case ND_MUL:
       printf("  imul rax, rdi\n");
       break;
-    
     case ND_DIV:
       printf("  cqo\n");
       printf("  idiv rax, rdi\n");
@@ -243,6 +239,7 @@ void gen(Node *node) {
 
   printf("  push rax\n");
 }
+
 
 // main
 int main(int argc, char **argv)
