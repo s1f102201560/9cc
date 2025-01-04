@@ -17,16 +17,15 @@ typedef enum {
 
 typedef struct Token Token;
 
-struct Token{
+struct Token {
   TokenKind kind;
   Token *next;
   char *str;
   int val;
 };
 
-
+Token *token;
 char *user_input;
-Token *token; // = struct Token *token;
 
 // error
 void error(char *fmt, ...) {
@@ -49,15 +48,13 @@ void error_at(char *loc, char *fmt, ...) {
   fprintf(stderr, "^ ");
   vfprintf(stderr, fmt, ap);
   fprintf(stderr, "\n");
-
-  exit(1);
 }
 
 // consume
 bool consume(char op) {
   if (token->kind != TK_RESERVED || token->str[0] != op)
     return false;
-  
+
   token = token->next;
   return true;
 }
@@ -65,7 +62,7 @@ bool consume(char op) {
 // expect
 void expect(char op) {
   if (token->kind != TK_RESERVED || token->str[0] != op)
-    error_at(token->str, "'%c' expected");
+    error_at(token->str, "expected '%c'", op);
   
   token = token->next;
 }
@@ -73,8 +70,8 @@ void expect(char op) {
 // expect_number
 int expect_number() {
   if (token->kind != TK_NUM)
-    error_at(token->str, "invalid token");
-  
+    error_at(token->str, "expected a number");
+
   int val = token->val;
   token = token->next;
   return val;
@@ -82,7 +79,7 @@ int expect_number() {
 
 // at_eof
 bool at_eof() {
-  return token->kind == TK_EOF;
+  return token->kind != TK_EOF;
 }
 
 // new_token
@@ -118,9 +115,8 @@ Token *tokenize(char *p) {
       continue;
     }
 
-    error_at(p, "トークナイズできません");
+    error_at(p, "invalid token");
   }
-  
   cur = new_token(TK_EOF, cur, p);
   
   return head.next;
