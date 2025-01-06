@@ -252,7 +252,8 @@ int main(int argc, char **argv)
   user_input = argv[1];
   token = tokenize(user_input);
   Node *node = expr();
-  
+  // "5+7"
+  // 5のnode生成 -> +の判定 -> 7のnode生成 -> +のnode生成 & リンクリストの連結(5と+と7)
   printf(".intel_syntax noprefix\n");
   printf(".globl main\n");
   printf("main:\n");
